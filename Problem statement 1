@@ -1,0 +1,23 @@
+Task 1
+-------
+SELECT name, salary, lead(salary) OVER (PARTITION BY unit ORDER BY salary)
+FROM users where salary <100 ;
+
+Jagjit	98	NULL
+Yadav	99	NULL
+
+
+Task 2
+------
+
+SELECT  name, salary, rank FROM
+(
+SELECT name, salary, dense_rank() OVER (PARTITION BY unit ORDER BY salary) AS rank 
+FROM users
+) temp
+ WHERE rank > 2;
+
+Sumit	200	3
+Yadav	300	4
+Mahoor	200	3
+Sunil	500	4
